@@ -35,8 +35,8 @@ class Response {
   }
 }
 
-// Route Handler
-app.post("/", (req, res) => {
+// Route Handler - Changed to /api/encrypt-decrypt
+app.post("/api/encrypt-decrypt", (req, res) => {
   const { text, type } = req.body;
 
   if (type === "encrypt") {
@@ -61,7 +61,7 @@ app.post("/", (req, res) => {
 });
 
 // Handle CORS preflight requests
-app.options("/", (req, res) => {
+app.options("/api/encrypt-decrypt", (req, res) => {
   res.sendStatus(200);
 });
 
