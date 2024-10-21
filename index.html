@@ -7,23 +7,27 @@
     <title>RSA Encrypt Decrypt with Express JS</title>
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
 
-<body>
-    <h1>RSA Encryption/Decryption</h1>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white shadow-md rounded-lg p-8 w-96">
+        <h1 class="text-2xl font-bold mb-4 text-center">RSA Encryption/Decryption</h1>
 
-    <div>
-        <label for="inputText">Text to Encrypt/Decrypt:</label>
-        <input type="text" id="inputText">
+        <div class="mb-4">
+            <label for="inputText" class="block text-sm font-medium text-gray-700">Text to Encrypt/Decrypt:</label>
+            <input type="text" id="inputText" class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:ring-blue-500" placeholder="Enter text here">
+        </div>
+
+        <div class="flex justify-between mb-4">
+            <button id="encryptButton" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded shadow hover:bg-blue-600">Encrypt</button>
+            <button id="decryptButton" class="bg-green-500 text-white font-semibold py-2 px-4 rounded shadow hover:bg-green-600">Decrypt</button>
+        </div>
+
+        <h2 class="text-lg font-semibold mb-2">Result:</h2>
+        <p id="result" class="border p-2 bg-gray-50 border-gray-300 rounded-md"></p>
     </div>
-
-    <div>
-        <button id="encryptButton">Encrypt</button>
-        <button id="decryptButton">Decrypt</button>
-    </div>
-
-    <h2>Result:</h2>
-    <p id="result"></p>
 
     <script>
         let lastEncryptedText = ""; // Variable to store the last encrypted text
