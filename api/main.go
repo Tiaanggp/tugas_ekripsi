@@ -24,26 +24,18 @@ type Response struct {
 var privateKey *rsa.PrivateKey
 var publicKey *rsa.PublicKey
 
-func main() {
-	// Generate RSA keys
-	var err error
-	privateKey, err = rsa.GenerateKey(rand.Reader, 2048)
-	if err != nil {
-		fmt.Println("Error generating RSA keys:", err)
-		return
-	}
-	publicKey = &privateKey.PublicKey
-
-	http.HandleFunc("/api/encrypt-decrypt", encryptDecryptHandler)
-	fmt.Println("Server running on http://localhost:8080")
-	http.ListenAndServe(":8080", nil)
-}
-
-func encryptDecryptHandler(w http.ResponseWriter, r *http.Request) {
+// Handler for Vercel
+func Handler(w http.ResponseWriter, r *http.Request) {
 	// Handle CORS
-	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+	w.Header().Set("Access-Control-Allow-Origin", "*")
 	w.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS")
 	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
+
+	// Handle OPTIONS request (CORS preflight)
+	if r.Method == http.MethodOptions {
+		w.WriteHeader(http.StatusOK)
+		return
+	}
 
 	if r.Method != http.MethodPost {
 		http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
@@ -78,4 +70,20 @@ func encryptDecryptHandler(w http.ResponseWriter, r *http.Request) {
 	} else {
 		http.Error(w, "Invalid operation type", http.StatusBadRequest)
 	}
+}
+
+func main() {
+	// Generate RSA keys
+	var err error
+	privateKey, err = rsa.GenerateKey(rand.Reader, 2048)
+	if err != nil {
+		fmt.Println("Error generating RSA keys:", err)
+		return
+	}
+	publicKey = &privateKey.PublicKey
+
+	// This will serve as the entry point for Vercel
+	http.HandleFunc("/api/encrypt-decrypt", Handler)
+	fmt.Println("Server running on http://localhost:8080")
+	http.ListenAndServe(":8080", nil)
 }
