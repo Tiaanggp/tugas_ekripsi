@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RSA Encrypt Decrypt with Golang</title>
+    <title>RSA Encrypt Decrypt with Expres JS</title>
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -24,17 +24,13 @@
 
     <h2>Result:</h2>
     <p id="result"></p>
-
-    <h2>Public Key:</h2>
-    <p id="publicKey"></p>
-
     <script>
         $(document).ready(function () {
             $('#encryptButton').click(async function () {
                 const text = $('#inputText').val();
                 try {
                     const res = await $.ajax({
-                        url: 'http://localhost:8080/api/encrypt-decrypt',
+                        url: 'http://localhost:3000',
                         type: 'POST',
                         contentType: 'application/json',
                         data: JSON.stringify({ text, type: 'encrypt' }),
@@ -50,7 +46,7 @@
                 const text = $('#inputText').val();
                 try {
                     const res = await $.ajax({
-                        url: 'http://localhost:8080/api/encrypt-decrypt',
+                        url: 'http://localhost:3000',
                         type: 'POST',
                         contentType: 'application/json',
                         data: JSON.stringify({ text, type: 'decrypt' }),
