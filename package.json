@@ -1,0 +1,12 @@
+{
+  "name": "encryption-decryption-api",
+  "version": "1.0.0",
+  "main": "api/encrypt-decrypt.js",
+  "scripts": {
+    "start": "node api/encrypt-decrypt.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "body-parser": "^1.19.0"
+  }
+}
