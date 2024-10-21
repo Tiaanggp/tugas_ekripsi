@@ -12,21 +12,21 @@
 </head>
 
 <body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <div class="bg-white shadow-md rounded-lg p-8 w-96">
-        <h1 class="text-2xl font-bold mb-4 text-center">RSA Encryption/Decryption</h1>
+    <div class="bg-white shadow-lg rounded-lg p-10 w-1/2 max-w-md"> <!-- Increased padding and width -->
+        <h1 class="text-3xl font-bold mb-6 text-center">RSA Encryption/Decryption</h1> <!-- Increased title size -->
 
-        <div class="mb-4">
-            <label for="inputText" class="block text-sm font-medium text-gray-700">Text to Encrypt/Decrypt:</label>
-            <input type="text" id="inputText" class="mt-1 block w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring focus:ring-blue-500" placeholder="Enter text here">
+        <div class="mb-6">
+            <label for="inputText" class="block text-lg font-medium text-gray-700">Text to Encrypt/Decrypt:</label> <!-- Increased label size -->
+            <input type="text" id="inputText" class="mt-1 block w-full border border-gray-300 rounded-md p-3 focus:outline-none focus:ring focus:ring-blue-500" placeholder="Enter text here"> <!-- Increased padding -->
         </div>
 
-        <div class="flex justify-between mb-4">
-            <button id="encryptButton" class="bg-blue-500 text-white font-semibold py-2 px-4 rounded shadow hover:bg-blue-600 transition duration-200">Encrypt</button>
-            <button id="decryptButton" class="bg-green-500 text-white font-semibold py-2 px-4 rounded shadow hover:bg-green-600 transition duration-200">Decrypt</button>
+        <div class="flex justify-between mb-6">
+            <button id="encryptButton" class="bg-blue-600 text-white font-semibold py-3 px-6 rounded shadow hover:bg-blue-700 transition duration-200">Encrypt</button> <!-- Increased padding -->
+            <button id="decryptButton" class="bg-green-600 text-white font-semibold py-3 px-6 rounded shadow hover:bg-green-700 transition duration-200">Decrypt</button> <!-- Increased padding -->
         </div>
 
-        <h2 class="text-lg font-semibold mb-2">Result:</h2>
-        <p id="result" class="border p-2 bg-gray-50 border-gray-300 rounded-md h-20 overflow-auto"></p>
+        <h2 class="text-xl font-semibold mb-4">Result:</h2> <!-- Increased subtitle size -->
+        <p id="result" class="border p-4 bg-gray-50 border-gray-300 rounded-md h-28 overflow-auto"></p> <!-- Increased height and padding -->
     </div>
 
     <script>
