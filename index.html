@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RSA Encrypt Decrypt with Expres JS</title>
+    <title>RSA Encrypt Decrypt with Express JS</title>
     <!-- Include jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
@@ -24,7 +24,10 @@
 
     <h2>Result:</h2>
     <p id="result"></p>
+
     <script>
+        let lastEncryptedText = ""; // Variable to store the last encrypted text
+
         $(document).ready(function () {
             $('#encryptButton').click(async function () {
                 const text = $('#inputText').val();
@@ -35,21 +38,26 @@
                         contentType: 'application/json',
                         data: JSON.stringify({ text, type: 'encrypt' }),
                     });
-                    $('#result').text(res.result || res.error);
-                    $('#publicKey').text(res.publicKey || '');
+                    lastEncryptedText = res.result; // Store the encrypted text
+                    $('#result').text(lastEncryptedText);
                 } catch (error) {
                     $('#result').text("Error: " + error.responseJSON.error);
                 }
             });
 
             $('#decryptButton').click(async function () {
-                const text = $('#inputText').val();
+                // Use the last encrypted text if available
+                const textToDecrypt = lastEncryptedText || $('#inputText').val();
+                if (!lastEncryptedText) {
+                    alert("Please encrypt some text first.");
+                    return;
+                }
                 try {
                     const res = await $.ajax({
                         url: 'http://localhost:3000',
                         type: 'POST',
                         contentType: 'application/json',
-                        data: JSON.stringify({ text, type: 'decrypt' }),
+                        data: JSON.stringify({ text: textToDecrypt, type: 'decrypt' }),
                     });
                     $('#result').text(res.result || res.error);
                 } catch (error) {
