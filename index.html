@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSA Encrypt Decrypt with Golang</title>
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    <h1>RSA Encryption/Decryption</h1>
+
+    <div>
+        <label for="inputText">Text to Encrypt/Decrypt:</label>
+        <input type="text" id="inputText">
+    </div>
+
+    <div>
+        <button id="encryptButton">Encrypt</button>
+        <button id="decryptButton">Decrypt</button>
+    </div>
+
+    <h2>Result:</h2>
+    <p id="result"></p>
+
+    <h2>Public Key:</h2>
+    <p id="publicKey"></p>
+
+    <script>
+        $(document).ready(function () {
+            $('#encryptButton').click(async function () {
+                const text = $('#inputText').val();
+                try {
+                    const res = await $.ajax({
+                        url: 'http://localhost:8080/api/encrypt-decrypt',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ text, type: 'encrypt' }),
+                    });
+                    $('#result').text(res.result || res.error);
+                    $('#publicKey').text(res.publicKey || '');
+                } catch (error) {
+                    $('#result').text("Error: " + error.responseJSON.error);
+                }
+            });
+
+            $('#decryptButton').click(async function () {
+                const text = $('#inputText').val();
+                try {
+                    const res = await $.ajax({
+                        url: 'http://localhost:8080/api/encrypt-decrypt',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ text, type: 'decrypt' }),
+                    });
+                    $('#result').text(res.result || res.error);
+                } catch (error) {
+                    $('#result').text("Error: " + error.responseJSON.error);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
