@@ -37,7 +37,7 @@
                 const text = $('#inputText').val();
                 try {
                     const res = await $.ajax({
-                        url: 'http://localhost:3000',
+                        url: 'https://rsa-enkripsi.vercel.app/api/encrypt-decrypt.js',
                         type: 'POST',
                         contentType: 'application/json',
                         data: JSON.stringify({ text, type: 'encrypt' }),
@@ -58,7 +58,7 @@
                 }
                 try {
                     const res = await $.ajax({
-                        url: 'http://localhost:3000',
+                        url: 'https://rsa-enkripsi.vercel.app/api/encrypt-decrypt.js',
                         type: 'POST',
                         contentType: 'application/json',
                         data: JSON.stringify({ text: textToDecrypt, type: 'decrypt' }),
